@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>ESL Preposition Drag & Drop Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Game Container -->
+  <div id="game-container">
+    
+    <!-- Header: Title, Controls, Instruction, and Stats -->
+    <header class="game-header">
+      <div class="top-bar">
+        <h1 class="game-title">🏫 ESL Preposition Adventure</h1>
+        
+        <!-- Difficulty Selector -->
+        <div class="difficulty-group">
+          <label for="difficulty-select">Difficulty:</label>
+          <select id="difficulty-select">
+            <option value="easy">Easy (5 Objects)</option>
+            <option value="medium" selected>Medium (10 Objects)</option>
+            <option value="hard">Hard (All Objects)</option>
+          </select>
+        </div>
+
+        <!-- Teacher Action Controls -->
+        <div class="controls-group">
+          <button id="btn-new-game" class="btn">🎮 New Game</button>
+          <button id="btn-reset" class="btn">🔄 Reset Scene</button>
+          <button id="btn-shuffle" class="btn">🔀 Shuffle</button>
+          <button id="btn-hint" class="btn">💡 Hint</button>
+          <button id="btn-mute" class="btn">🔊 Sound: On</button>
+          <button id="btn-fullscreen" class="btn">⛶ Fullscreen</button>
+        </div>
+      </div>
+
+      <!-- Current Instruction Display -->
+      <div class="instruction-card">
+        <span id="instruction-text">Loading instruction...</span>
+        <div id="feedback-banner" class="feedback-banner hidden"></div>
+      </div>
+
+      <!-- Scoreboard Bar -->
+      <div class="score-bar">
+        <div class="stat-item">⭐ Score: <span id="score-val">0</span></div>
+        <div class="stat-item">🎯 Completed: <span id="completed-val">0</span></div>
+        <div class="stat-item">📊 Accuracy: <span id="accuracy-val">100%</span></div>
+      </div>
+    </header>
+
+    <!-- Main Interactive Scene / Classroom -->
+    <main id="scene-container" class="room-classroom">
+      <!-- Draggable objects will be dynamically injected here by JavaScript -->
+    </main>
+
+  </div>
+
+  <!-- Audio Context Initialization Overlay (Required for Auto-play Policies) -->
+  <div id="start-overlay" class="overlay">
+    <div class="overlay-card">
+      <h2>🎉 Welcome ESL Learners!</h2>
+      <p>Master English prepositions like <strong>on, under, in, next to, behind</strong>, and more!</p>
+      <button id="btn-start" class="btn btn-large">🚀 Tap to Start Playing!</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
