@@ -17,8 +17,8 @@ const GAME_CONFIG = {
   */
   objects: [
     { id: 'cat',       label: 'Cat',       image: 'Cat jp.png', emoji: '', width: 80,  height: 90,  difficulty: 'easy' },
-    { id: 'dog',       label: '',       image: '', emoji: '🐶', width: 75,  height: 75,  difficulty: 'easy' },
-    { id: 'sofa',      label: '',      image: '', emoji: '🛋️', width: 140, height: 90,  difficulty: 'easy' },
+    { id: 'dog',       label: '_',       image: '', emoji: '🐶', width: 75,  height: 75,  difficulty: 'easy' },
+    { id: 'sofa',      label: '_',      image: '', emoji: '🛋️', width: 140, height: 90,  difficulty: 'easy' },
     { id: 'chair',     label: 'Chair',     image: '', emoji: '🪑', width: 80,  height: 90,  difficulty: 'easy' },
     { id: 'toybox',    label: 'Toy Box',   image: '', emoji: '🧸', width: 100, height: 80,  difficulty: 'easy' },
     { id: 'tv',        label: 'TV',        image: '', emoji: '📺', width: 110, height: 90,  difficulty: 'medium' },
