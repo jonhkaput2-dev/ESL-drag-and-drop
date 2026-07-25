@@ -16,7 +16,7 @@ const GAME_CONFIG = {
      - To change the word/label: change label: 'Kitten' or 'Cat'
   */
   objects: [
-    { id: 'cat',       label: 'Cat',       image: '', emoji: '🐱', width: 70,  height: 70,  difficulty: 'easy' },
+    { id: 'cat',       label: 'Cat',       image: 'Cat jp.png', emoji: '', width: 80,  height: 90,  difficulty: 'easy' },
     { id: 'dog',       label: 'Dog',       image: '', emoji: '🐶', width: 75,  height: 75,  difficulty: 'easy' },
     { id: 'sofa',      label: 'Sofa',      image: '', emoji: '🛋️', width: 140, height: 90,  difficulty: 'easy' },
     { id: 'chair',     label: 'Chair',     image: '', emoji: '🪑', width: 80,  height: 90,  difficulty: 'easy' },
