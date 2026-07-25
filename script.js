@@ -1,81 +1,68 @@
-/**
- * ============================================================================
- * ESL PREPOSITION DRAG & DROP GAME ENGINE
- * Dedicated for Young ESL Learners
- * Fully commented and highly modular for easy teacher customization.
- * ============================================================================
- */
-
 /* ============================================================================
-   1. TEACHER CONFIGURATION & QUESTION BANK
-   Teachers can edit object names, emojis, target positions, and instruction templates here.
+   TEACHER CUSTOMIZATION SECTION
    ============================================================================ */
 const GAME_CONFIG = {
-  // Preposition Spatial Distance Tolerance (In pixels)
-  spatialTolerance: 75,
-
-  // Success Sounds (Frequency sequences using native Web Audio API)
+  spatialTolerance: 80,
   soundEffects: {
-    success: [523.25, 659.25, 783.99, 1046.50], // C Major Arpeggio
-    error: [220, 196],                          // Low error buzz
-    click: [400],                               // Quick tap tone
-    celebration: [440, 554.37, 659.25, 880]     // Win tune
+    success: [523.25, 659.25, 783.99, 1046.50],
+    error: [220, 196],
+    click: [400],
+    celebration: [440, 554.37, 659.25, 880]
   },
-
-  // Available Prepositions for logic evaluation
   prepositions: ['on', 'under', 'in', 'next to', 'behind', 'between', 'in front of', 'above', 'below'],
-
-  // Master Object Library (Includes visuals, default positions in %, and physical dimensions)
+  
+  /* EDIT YOUR OBJECTS & PICTURES HERE
+     - To use an uploaded picture: set image: 'cat.png'
+     - To change the word/label: change label: 'Kitten' or 'Cat'
+  */
   objects: [
-    { id: 'cat',       label: 'Cat',       emoji: '🐱', width: 70,  height: 70,  difficulty: 'easy' },
-    { id: 'dog',       label: 'Dog',       emoji: '🐶', width: 75,  height: 75,  difficulty: 'easy' },
-    { id: 'sofa',      label: 'Sofa',      emoji: '🛋️', width: 140, height: 90,  difficulty: 'easy' },
-    { id: 'chair',     label: 'Chair',     emoji: '🪑', width: 80,  height: 90,  difficulty: 'easy' },
-    { id: 'toybox',    label: 'Toy Box',   emoji: '🧸', width: 100, height: 80,  difficulty: 'easy' },
-    { id: 'tv',        label: 'TV',        emoji: '📺', width: 110, height: 90,  difficulty: 'medium' },
-    { id: 'table',     label: 'Table',     emoji: '🪵', width: 130, height: 80,  difficulty: 'medium' },
-    { id: 'carpet',    label: 'Carpet',    emoji: '🟦', width: 160, height: 60,  difficulty: 'medium' },
-    { id: 'lamp',      label: 'Lamp',      emoji: '💡', width: 60,  height: 90,  difficulty: 'medium' },
-    { id: 'bookshelf', label: 'Bookshelf', emoji: '📚', width: 100, height: 130, difficulty: 'medium' },
-    { id: 'clock',     label: 'Clock',     emoji: '⏰', width: 60,  height: 60,  difficulty: 'hard' },
-    { id: 'window',    label: 'Window',    emoji: '🪟', width: 100, height: 100, difficulty: 'hard' },
-    { id: 'flowers',   label: 'Flowers',   emoji: '💐', width: 60,  height: 60,  difficulty: 'hard' },
-    { id: 'ball',      label: 'Ball',      emoji: '⚽', width: 60,  height: 60,  difficulty: 'hard' },
-    { id: 'bed',       label: 'Bed',       emoji: '🛏️', width: 140, height: 100, difficulty: 'hard' },
-    { id: 'pillow',    label: 'Pillow',    emoji: '🪶', width: 60,  height: 50,  difficulty: 'hard' },
-    { id: 'bear',      label: 'Teddy Bear',emoji: '🧸', width: 65,  height: 65,  difficulty: 'hard' }
+    { id: 'cat',       label: 'Cat',       image: '', emoji: '🐱', width: 70,  height: 70,  difficulty: 'easy' },
+    { id: 'dog',       label: 'Dog',       image: '', emoji: '🐶', width: 75,  height: 75,  difficulty: 'easy' },
+    { id: 'sofa',      label: 'Sofa',      image: '', emoji: '🛋️', width: 140, height: 90,  difficulty: 'easy' },
+    { id: 'chair',     label: 'Chair',     image: '', emoji: '🪑', width: 80,  height: 90,  difficulty: 'easy' },
+    { id: 'toybox',    label: 'Toy Box',   image: '', emoji: '🧸', width: 100, height: 80,  difficulty: 'easy' },
+    { id: 'tv',        label: 'TV',        image: '', emoji: '📺', width: 110, height: 90,  difficulty: 'medium' },
+    { id: 'table',     label: 'Table',     image: '', emoji: '🪵', width: 130, height: 80,  difficulty: 'medium' },
+    { id: 'carpet',    label: 'Carpet',    image: '', emoji: '🟦', width: 160, height: 60,  difficulty: 'medium' },
+    { id: 'lamp',      label: 'Lamp',      image: '', emoji: '💡', width: 60,  height: 90,  difficulty: 'medium' },
+    { id: 'bookshelf', label: 'Bookshelf', image: '', emoji: '📚', width: 100, height: 130, difficulty: 'medium' },
+    { id: 'clock',     label: 'Clock',     image: '', emoji: '⏰', width: 60,  height: 60,  difficulty: 'hard' },
+    { id: 'window',    label: 'Window',    image: '', emoji: '🪟', width: 100, height: 100, difficulty: 'hard' },
+    { id: 'flowers',   label: 'Flowers',   image: '', emoji: '💐', width: 60,  height: 60,  difficulty: 'hard' },
+    { id: 'ball',      label: 'Ball',      image: '', emoji: '⚽', width: 60,  height: 60,  difficulty: 'hard' },
+    { id: 'bed',       label: 'Bed',       image: '', emoji: '🛏️', width: 140, height: 100, difficulty: 'hard' },
+    { id: 'pillow',    label: 'Pillow',    image: '', emoji: '🪶', width: 60,  height: 50,  difficulty: 'hard' },
+    { id: 'bear',      label: 'Teddy Bear',image: '', emoji: '🧸', width: 65,  height: 65,  difficulty: 'hard' }
   ]
 };
 
-/* ============================================================================
-   2. GAME STATE MANAGEMENT
-   ============================================================================ */
 const state = {
-  difficulty: 'medium',     // 'easy', 'medium', or 'hard'
-  activeObjects: [],        // Objects active in the current scene
-  currentInstruction: null, // Holds subject, preposition, target Object(s)
+  difficulty: 'medium',
+  activeObjects: [],
+  currentInstruction: null,
   score: 0,
   questionsCompleted: 0,
   totalAttempts: 0,
   isMuted: false,
-  dragState: null           // Stores active PointerEvent metadata
+  dragState: null
 };
 
-/* Web Audio Context Synthesizer (Zero External Files Required) */
 let audioCtx = null;
 
-/* ============================================================================
-   3. INITIALIZATION & SETUP
-   ============================================================================ */
-document.addEventListener('DOMContentLoaded', () => {
-  // Bind Audio Context start trigger on first user interaction
-  document.getElementById('btn-start').addEventListener('click', () => {
-    initAudioContext();
-    document.getElementById('start-overlay').classList.add('hidden');
-    startNewGame();
-  });
+function unlockAudio() {
+  if (!audioCtx) {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (AudioContext) audioCtx = new AudioContext();
+  }
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+}
 
-  // Bind Control Buttons
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.addEventListener('click', unlockAudio, { once: true });
+  document.body.addEventListener('touchstart', unlockAudio, { once: true });
+
   document.getElementById('difficulty-select').addEventListener('change', (e) => {
     state.difficulty = e.target.value;
     startNewGame();
@@ -87,23 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-hint').addEventListener('click', () => { playTone('click'); showHint(); });
   document.getElementById('btn-mute').addEventListener('click', toggleMute);
   document.getElementById('btn-fullscreen').addEventListener('click', toggleFullscreen);
+
+  startNewGame();
 });
 
-/** Initializes Web Audio API Context */
-function initAudioContext() {
-  if (!audioCtx) {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    audioCtx = new AudioContext();
-  }
-}
-
-/* ============================================================================
-   4. CORE GAME LOOP & SCENE GENERATION
-   ============================================================================ */
-
-/** Starts a completely new game session based on selected difficulty */
 function startNewGame() {
-  // Filter objects based on difficulty setting
   if (state.difficulty === 'easy') {
     state.activeObjects = GAME_CONFIG.objects.slice(0, 5);
   } else if (state.difficulty === 'medium') {
@@ -116,42 +91,36 @@ function startNewGame() {
   generateNextInstruction();
 }
 
-/** Renders objects dynamically onto the room scene */
 function renderScene() {
   const scene = document.getElementById('scene-container');
-  scene.innerHTML = ''; // Clear previous objects
+  scene.innerHTML = '';
 
-  const sceneRect = scene.getBoundingClientRect();
-  const cols = Math.ceil(Math.sqrt(state.activeObjects.length));
-  const rows = Math.ceil(state.activeObjects.length / cols);
-
-  state.activeObjects.forEach((obj, index) => {
+  state.activeObjects.forEach((obj) => {
     const el = document.createElement('div');
     el.className = 'draggable-object';
     el.id = `obj-${obj.id}`;
     el.setAttribute('data-id', obj.id);
 
-    // Dynamic scale/size
     el.style.width = `${obj.width}px`;
     el.style.height = `${obj.height}px`;
 
-    // Visual Avatar and Text Label
+    // Render image if uploaded, otherwise use emoji
+    const visualContent = obj.image 
+      ? `<img src="${obj.image}" class="object-img" alt="${obj.label}">`
+      : `<div class="object-avatar">${obj.emoji}</div>`;
+
     el.innerHTML = `
-      <div class="object-avatar">${obj.emoji}</div>
+      ${visualContent}
       <div class="object-label">${obj.label}</div>
     `;
 
     scene.appendChild(el);
-
-    // Attach Unified Pointer Event Listeners for Touch/Mouse
     attachDragListeners(el);
   });
 
-  // Spread out objects nicely across the room
   shuffleObjectPositions();
 }
 
-/** Resets objects to grid layout */
 function resetObjectPositions() {
   const scene = document.getElementById('scene-container');
   const sceneWidth = scene.clientWidth;
@@ -176,46 +145,41 @@ function resetObjectPositions() {
   });
 }
 
-/** Shuffles objects randomly across the scene */
 function shuffleObjectPositions() {
   const scene = document.getElementById('scene-container');
-  const sceneWidth = scene.clientWidth;
-  const sceneHeight = scene.clientHeight;
+  const sceneWidth = scene.clientWidth || 800;
+  const sceneHeight = scene.clientHeight || 500;
 
   state.activeObjects.forEach((obj) => {
     const el = document.getElementById(`obj-${obj.id}`);
     if (!el) return;
 
-    // Generate random positions keeping padding from edges
     const randomX = Math.random() * (sceneWidth - obj.width - 40) + 20;
     const randomY = Math.random() * (sceneHeight - obj.height - 40) + 20;
 
-    el.style.left = `${randomX}px`;
-    el.style.top = `${randomY}px`;
+    el.style.left = `${Math.max(10, randomX)}px`;
+    el.style.top = `${Math.max(10, randomY)}px`;
   });
 }
 
-/* ============================================================================
-   5. POINTER DRAG ENGINE (TOUCH & MOUSE COMPATIBLE)
-   ============================================================================ */
-
-/** Attaches Pointer events to support iPad Touch, Windows Touch, and Mouse */
 function attachDragListeners(element) {
   element.addEventListener('pointerdown', onPointerDown);
 }
 
 function onPointerDown(e) {
+  unlockAudio();
   e.preventDefault();
   const el = e.currentTarget;
   
-  // Capture pointer focus to ensure smooth dragging even if finger/mouse slips
-  el.setPointerCapture(e.pointerId);
+  if (el.setPointerCapture) {
+    try { el.setPointerCapture(e.pointerId); } catch(err) {}
+  }
+  
   el.classList.add('is-dragging');
 
   const rect = el.getBoundingClientRect();
   const parentRect = document.getElementById('scene-container').getBoundingClientRect();
 
-  // Store drag offset relative to the object's top-left corner
   state.dragState = {
     element: el,
     pointerId: e.pointerId,
@@ -224,21 +188,18 @@ function onPointerDown(e) {
     parentRect: parentRect
   };
 
-  el.addEventListener('pointermove', onPointerMove);
-  el.addEventListener('pointerup', onPointerUp);
-  el.addEventListener('pointercancel', onPointerUp);
+  window.addEventListener('pointermove', onPointerMove);
+  window.addEventListener('pointerup', onPointerUp);
 }
 
 function onPointerMove(e) {
-  if (!state.dragState || state.dragState.pointerId !== e.pointerId) return;
+  if (!state.dragState) return;
 
   const { element, offsetX, offsetY, parentRect } = state.dragState;
 
-  // Calculate new absolute positions inside room
   let newX = e.clientX - parentRect.left - offsetX;
   let newY = e.clientY - parentRect.top - offsetY;
 
-  // Keep object inside room boundaries
   newX = Math.max(0, Math.min(parentRect.width - element.offsetWidth, newX));
   newY = Math.max(0, Math.min(parentRect.height - element.offsetHeight, newY));
 
@@ -247,42 +208,37 @@ function onPointerMove(e) {
 }
 
 function onPointerUp(e) {
-  if (!state.dragState || state.dragState.pointerId !== e.pointerId) return;
+  if (!state.dragState) return;
 
   const { element, pointerId } = state.dragState;
-  element.releasePointerCapture(pointerId);
+  
+  if (element.releasePointerCapture) {
+    try { element.releasePointerCapture(pointerId); } catch(err) {}
+  }
+
   element.classList.remove('is-dragging');
 
-  element.removeEventListener('pointermove', onPointerMove);
-  element.removeEventListener('pointerup', onPointerUp);
-  element.removeEventListener('pointercancel', onPointerUp);
+  window.removeEventListener('pointermove', onPointerMove);
+  window.removeEventListener('pointerup', onPointerUp);
 
+  const droppedEl = state.dragState.element;
   state.dragState = null;
 
-  // Evaluate if the drop fulfills current instruction requirements
-  evaluateAnswer(element);
+  evaluateAnswer(droppedEl);
 }
 
-/* ============================================================================
-   6. INSTRUCTION & PREPOSITION EVALUATION ENGINE
-   ============================================================================ */
-
-/** Generates a new random preposition question based on active objects */
 function generateNextInstruction() {
   if (state.activeObjects.length < 2) return;
 
-  // Select random subject object
   const subjectIndex = Math.floor(Math.random() * state.activeObjects.length);
   const subjectObj = state.activeObjects[subjectIndex];
 
-  // Select distinct target object
   let targetObj;
   do {
     const targetIndex = Math.floor(Math.random() * state.activeObjects.length);
     targetObj = state.activeObjects[targetIndex];
   } while (targetObj.id === subjectObj.id);
 
-  // Filter available prepositions by difficulty
   let availablePrepositions = ['on', 'under', 'in'];
   if (state.difficulty === 'medium') {
     availablePrepositions.push('next to', 'behind');
@@ -292,7 +248,6 @@ function generateNextInstruction() {
 
   const prep = availablePrepositions[Math.floor(Math.random() * availablePrepositions.length)];
 
-  // For "between", select a second target object if hard mode
   let targetObj2 = null;
   if (prep === 'between' && state.activeObjects.length >= 3) {
     do {
@@ -301,14 +256,8 @@ function generateNextInstruction() {
     } while (targetObj2.id === subjectObj.id || targetObj2.id === targetObj.id);
   }
 
-  state.currentInstruction = {
-    subject: subjectObj,
-    preposition: prep,
-    target: targetObj,
-    target2: targetObj2
-  };
+  state.currentInstruction = { subject: subjectObj, preposition: prep, target: targetObj, target2: targetObj2 };
 
-  // Build English Instruction Phrase
   let instructionText = `Put the <strong>${subjectObj.label}</strong> ${prep} the <strong>${targetObj.label}</strong>.`;
   if (prep === 'between' && targetObj2) {
     instructionText = `Put the <strong>${subjectObj.label}</strong> ${prep} the <strong>${targetObj.label}</strong> and the <strong>${targetObj2.label}</strong>.`;
@@ -317,14 +266,12 @@ function generateNextInstruction() {
   document.getElementById('instruction-text').innerHTML = instructionText;
 }
 
-/** Evaluates whether dropped object satisfies spatial preposition constraints */
 function evaluateAnswer(droppedEl) {
   if (!state.currentInstruction) return;
 
   const droppedId = droppedEl.getAttribute('data-id');
   const { subject, preposition, target, target2 } = state.currentInstruction;
 
-  // If wrong object was dragged, ignore check
   if (droppedId !== subject.id) return;
 
   state.totalAttempts++;
@@ -333,40 +280,33 @@ function evaluateAnswer(droppedEl) {
   const subjRect = droppedEl.getBoundingClientRect();
   const targetRect = targetEl.getBoundingClientRect();
 
-  // Geometric center points
   const subjCenter = { x: subjRect.left + subjRect.width / 2, y: subjRect.top + subjRect.height / 2 };
   const targetCenter = { x: targetRect.left + targetRect.width / 2, y: targetRect.top + targetRect.height / 2 };
 
   let isCorrect = false;
   const tol = GAME_CONFIG.spatialTolerance;
 
-  // Spatial Logic Definitions
   switch (preposition) {
     case 'on':
     case 'above':
-      // Subject should be higher (smaller Y) and horizontally aligned
       isCorrect = (subjCenter.y < targetCenter.y) && Math.abs(subjCenter.x - targetCenter.x) < tol;
       break;
 
     case 'under':
     case 'below':
-      // Subject should be lower (larger Y) and horizontally aligned
       isCorrect = (subjCenter.y > targetCenter.y) && Math.abs(subjCenter.x - targetCenter.x) < tol;
       break;
 
     case 'in':
     case 'in front of':
-      // Overlapping bounding boxes
       isCorrect = Math.abs(subjCenter.x - targetCenter.x) < tol && Math.abs(subjCenter.y - targetCenter.y) < tol;
       break;
 
     case 'next to':
-      // Horizontally adjacent on either left or right
       isCorrect = Math.abs(subjCenter.y - targetCenter.y) < tol && Math.abs(subjCenter.x - targetCenter.x) < (tol + 60);
       break;
 
     case 'behind':
-      // Slightly higher and near center (simulating depth)
       isCorrect = (subjCenter.y <= targetCenter.y + 20) && Math.abs(subjCenter.x - targetCenter.x) < tol;
       break;
 
@@ -375,7 +315,6 @@ function evaluateAnswer(droppedEl) {
         const target2El = document.getElementById(`obj-${target2.id}`);
         const t2Rect = target2El.getBoundingClientRect();
         const t2Center = { x: t2Rect.left + t2Rect.width / 2, y: t2Rect.top + t2Rect.height / 2 };
-        
         const minX = Math.min(targetCenter.x, t2Center.x);
         const maxX = Math.max(targetCenter.x, t2Center.x);
         isCorrect = (subjCenter.x >= minX - 20 && subjCenter.x <= maxX + 20);
@@ -392,7 +331,6 @@ function evaluateAnswer(droppedEl) {
   updateScoreboard();
 }
 
-/** Triggered when student answers correctly */
 function handleSuccess(element) {
   state.score++;
   state.questionsCompleted++;
@@ -401,31 +339,23 @@ function handleSuccess(element) {
   showFeedback('⭐ Great Job!', 'success');
   spawnStarsAround(element);
 
-  // Check for 10-question milestone celebration
   if (state.questionsCompleted % 10 === 0) {
     setTimeout(() => {
       playTone('celebration');
       showFeedback('🎉 10 Completed! Awesome!', 'success');
-    }, 600);
+    }, 500);
   }
 
-  // Auto-generate next instruction after short pause
   setTimeout(() => {
     generateNextInstruction();
   }, 1200);
 }
 
-/** Triggered on incorrect drop placement */
 function handleWrongAttempt() {
   playTone('error');
   showFeedback('❌ Try Again!', 'error');
 }
 
-/* ============================================================================
-   7. FEEDBACK, ANIMATIONS & TEACHER HINTS
-   ============================================================================ */
-
-/** Displays temporary visual banner message */
 function showFeedback(text, type) {
   const banner = document.getElementById('feedback-banner');
   banner.textContent = text;
@@ -436,7 +366,6 @@ function showFeedback(text, type) {
   }, 1000);
 }
 
-/** Highlights subject and target objects for assistance */
 function showHint() {
   if (!state.currentInstruction) return;
 
@@ -452,25 +381,21 @@ function showHint() {
   }, 2000);
 }
 
-/** Spawns cute floating stars particle effect on success */
 function spawnStarsAround(element) {
   const rect = element.getBoundingClientRect();
   const scene = document.getElementById('scene-container');
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 5; i++) {
     const star = document.createElement('div');
     star.className = 'star-particle';
     star.textContent = '⭐';
-    star.style.left = `${rect.left + Math.random() * rect.width - 10}px`;
-    star.style.top = `${rect.top + Math.random() * rect.height - 10}px`;
-    
+    star.style.left = `${rect.left + Math.random() * rect.width}px`;
+    star.style.top = `${rect.top + Math.random() * rect.height}px`;
     scene.appendChild(star);
-
     setTimeout(() => star.remove(), 1000);
   }
 }
 
-/** Updates Scoreboard Stats */
 function updateScoreboard() {
   document.getElementById('score-val').textContent = state.score;
   document.getElementById('completed-val').textContent = state.questionsCompleted;
@@ -482,13 +407,10 @@ function updateScoreboard() {
   document.getElementById('accuracy-val').textContent = `${accuracy}%`;
 }
 
-/* ============================================================================
-   8. AUDIO SYNTHESIZER & SYSTEM CONTROLS (FULL OFFLINE WORK)
-   ============================================================================ */
-
-/** Synthesizes audio tones using standard browser Web Audio API */
 function playTone(type) {
-  if (state.isMuted || !audioCtx) return;
+  if (state.isMuted) return;
+  unlockAudio();
+  if (!audioCtx) return;
 
   const freqs = GAME_CONFIG.soundEffects[type] || [440];
   let startTime = audioCtx.currentTime;
@@ -498,23 +420,22 @@ function playTone(type) {
     const gain = audioCtx.createGain();
 
     osc.type = type === 'error' ? 'sawtooth' : 'sine';
-    osc.frequency.setValueAtTime(freq, startTime + idx * 0.12);
+    osc.frequency.setValueAtTime(freq, startTime + idx * 0.1);
 
-    gain.gain.setValueAtTime(0.2, startTime + idx * 0.12);
-    gain.gain.exponentialRampToValueAtTime(0.01, startTime + (idx + 1) * 0.12);
+    gain.gain.setValueAtTime(0.15, startTime + idx * 0.1);
+    gain.gain.exponentialRampToValueAtTime(0.01, startTime + (idx + 1) * 0.1);
 
     osc.connect(gain);
     gain.connect(audioCtx.destination);
 
-    osc.start(startTime + idx * 0.12);
-    osc.stop(startTime + (idx + 1) * 0.12);
+    osc.start(startTime + idx * 0.1);
+    osc.stop(startTime + (idx + 1) * 0.1);
   });
 }
 
 function toggleMute() {
   state.isMuted = !state.isMuted;
-  const btn = document.getElementById('btn-mute');
-  btn.textContent = state.isMuted ? '🔇 Sound: Off' : '🔊 Sound: On';
+  document.getElementById('btn-mute').textContent = state.isMuted ? '🔇 Sound: Off' : '🔊 Sound: On';
 }
 
 function toggleFullscreen() {
